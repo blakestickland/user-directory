@@ -12,67 +12,37 @@ import FilterForm from "./FilterForm";
 class UserContainer extends Component {
     state = {
       result: [],
-      result2: [],
-      // result: {},
+      currentResult: [],
       search: "",
-      sortType: 'asc'
+      sortTypes: "up"
     };
 
   // When this component mounts, search for "20" of the randomly generated employees
   componentDidMount() {
     this.getUsers();
-  }
-
-  // // New code in next para for filtering
-  // componentWillMount() {
-  //   this.setState({
-  //     result,
-  //     filteredResult: result
-  //   })
-  // }
+  };
 
   getUsers = query => {
     API.getUsers(query)
       .then(res => 
-        this.setState({ result: res.data.results, result2: res.data.results }))
-        .catch(err => console.log(err));
+        this.setState({ result: res.data.results, currentResult: res.data.results }))
+      .catch(err => console.log(err));
   };
-
-  // Filter
-  // filterUsers = () => {
-  //   users.filter(user => {
-  //   return  user.toLowercase().indexOf(this.state.getUsers.toLowercase()) !== -1
-  // })};
-  // filterUsers = () => {
-  //   users.filter(user => {
-  //   return  user.toLowercase().indexOf(this.state.getUsers.toLowercase()) !== -1
-  // })};
-
-  
-  // Sort
-  //   users.sort(compareFunction)
-  //  compareFunction = (a,b) => {
-    //   //  apply logic here
-    //   return a.name - b.name // (asc)
-    //          b.name - a.name // (desc)
-    //  }
     
-    handleInputChange = event => {
-      // const name = event.target.name;
-      const value = event.target.value;
-      this.setState({
-        search: value
+  handleInputChange = event => {
+    const value = event.target.value;
+    this.setState({
+      search: value
+    });
+    const filteredResults = this.state.currentResult.filter((user) => {
+        return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
+          user.name.last.toLowerCase().includes(value.toLowerCase())
       });
-      const filteredResults = this.state.result2.filter((user) => {
-          return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
-            user.name.last.toLowerCase().includes(value.toLowerCase())
-          // return user.name.first.toLowerCase().indexOf(this.state.getUsers.toLowerCase()) !== -1
-        })
-        this.setState({result: filteredResults})
-      };
+      this.setState({result: filteredResults})
+  };
     
-    // When the form is submitted, search the Random Users API for the value of `this.state.search`
-    handleFormSubmit = event => {
+  // When the form is submitted, search the Random Users API for the value of `this.state.search`
+  handleFormSubmit = event => {
     event.preventDefault();
     const searchUsers = event.target.value;
     this.setState({
@@ -85,30 +55,67 @@ class UserContainer extends Component {
 	// method called every time the sort button is clicked
 	// it will change the currentSort value to the next one
 	onSortChange = () => {
-    const sortTypes = {
-      up: {
-        class: 'sort-up',
-        fn: (a, b) => a.props.user.name.last - b.props.user.name.last
-      },
-      down: {
-        class: 'sort-down',
-        fn: (a, b) => b.props.user.name.last - a.props.user.name.last
-      },
-      default: {
-        class: 'sort',
-        fn: (a, b) => a
-      }
-    };
-    const { currentSort } = this.state;
+    const { sortTypes, currentResult } = this.state;
+    console.log({sortTypes});
 		let nextSort;
+    let sortedResult;
 
-		if (currentSort === 'down') nextSort = 'up';
-		else if (currentSort === 'up') nextSort = 'default';
-		else if (currentSort === 'default') nextSort = 'down';
+		if (sortTypes === 'down') {
+      sortedResult = currentResult.sort((a, b) => b.name.last.localeCompare(a.name.last));
+      console.log(sortedResult);
+      nextSort = 'up';
+      this.setState({
+        ...this.state,
+        sortTypes: nextSort,
+        currentResult: sortedResult
+      });
+    }
+		else if (sortTypes === 'up') {
+      sortedResult = currentResult.sort((a, b) => a.name.last.localeCompare(b.name.last));
+      console.log(sortedResult);
+      nextSort = 'default';
+      this.setState({
+        ...this.state,
+        sortTypes: nextSort,
+        currentResult: sortedResult
+      });
 
-		this.setState({
-			currentSort: nextSort
-		});
+    } 
+		else if (sortTypes === 'default') {
+      // sortedResult = currentResult.sort((a, b) => a);
+      nextSort = 'down';
+      this.setState({
+        ...this.state,
+        sortTypes: nextSort,
+        currentResult: this.state.result
+      });
+
+    } 
+
+// put sortType here as a switch statement
+// switch (sortTypes) {
+//   case "up": {}currentResult.sort((a, b) => a.name.last - b.name.last);
+//     nextSort = 'default';
+//     break;
+
+//   case "down": currentResult.sort((a, b) => b.name.last - a.name.last);
+//     nextSort = 'up';
+//     break;
+
+//   default: currentResult.sort((a, b) => a);
+//   nextSort = 'down'; 
+//   break;
+// }
+
+// pass in nextSort (defined above)
+// within each switch case, grab current result state, do .sort, put sort logic and set currentState equal to it. 
+// put currentState into a temp variable.
+// have a method of changing the button to activate the next state. 
+		// this.setState({
+		// 	...this.state,
+    //   sortTypes: nextSort,
+    //   currentResult: sortedResult
+		// });
 	};
 
 
@@ -131,7 +138,7 @@ class UserContainer extends Component {
         <UsersTable 
           data={this.state} 
           search={this.handleFormSubmit} 
-          // sort={this.onSortChange}
+          sort={this.onSortChange}
         />
       </div>
     );

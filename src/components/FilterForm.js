@@ -4,7 +4,7 @@ function FilterForm (props) {
   
     return (
       <div>
-        <label htmlFor="filter">Filter by User: </label>
+        <label htmlFor="filter">Filter by Name: </label>
         <input 
             type="text" 
             id="filter" 
