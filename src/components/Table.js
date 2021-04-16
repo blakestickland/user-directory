@@ -113,12 +113,15 @@ function Table(props) {
     // });
     
     return (
-      <table>
-          <thead>
+      <table className="table mt-3">
+          <thead className="thead-dark">
             <caption>User Directory</caption>
               <tr>
                   <th scope="col">Image</th>
                   <th scope="col">Name</th>
+                    {/* <button onClick={this.onSortChange}>
+                      <i className={`fas fa-${sortTypes[currentSort].class}`} />
+                    </button> */}
                   <th scope="col">Phone</th>
                   <th scope="col">Email</th>
                   <th scope="col">Location</th>

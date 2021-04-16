@@ -84,38 +84,40 @@ class UserContainer extends Component {
   
 	// method called every time the sort button is clicked
 	// it will change the currentSort value to the next one
-	// onSortChange = () => {
-  //   const sortTypes = {
-  //     up: {
-  //       class: 'sort-up',
-  //       fn: (a, b) => a.props.user.name.last - b.props.user.name.last
-  //     },
-  //     down: {
-  //       class: 'sort-down',
-  //       fn: (a, b) => b.props.user.name.last - a.props.user.name.last
-  //     },
-  //     default: {
-  //       class: 'sort',
-  //       fn: (a, b) => a
-  //     }
-  //   };
-  //   const { currentSort } = this.state;
-	// 	let nextSort;
+	onSortChange = () => {
+    const sortTypes = {
+      up: {
+        class: 'sort-up',
+        fn: (a, b) => a.props.user.name.last - b.props.user.name.last
+      },
+      down: {
+        class: 'sort-down',
+        fn: (a, b) => b.props.user.name.last - a.props.user.name.last
+      },
+      default: {
+        class: 'sort',
+        fn: (a, b) => a
+      }
+    };
+    const { currentSort } = this.state;
+		let nextSort;
 
-	// 	if (currentSort === 'down') nextSort = 'up';
-	// 	else if (currentSort === 'up') nextSort = 'default';
-	// 	else if (currentSort === 'default') nextSort = 'down';
+		if (currentSort === 'down') nextSort = 'up';
+		else if (currentSort === 'up') nextSort = 'default';
+		else if (currentSort === 'default') nextSort = 'down';
 
-	// 	this.setState({
-	// 		currentSort: nextSort
-	// 	});
-	// };
+		this.setState({
+			currentSort: nextSort
+		});
+	};
 
 
   render() {
     return (
       
-      <div>
+      <div className="container">
+        <h1 className="text-center">User Directory</h1>
+        <hr></hr>
         <SearchForm
           value={this.state.search}
           search={this.state.search}
@@ -126,7 +128,11 @@ class UserContainer extends Component {
          search={this.state.search}
          handleInputChange={this.handleInputChange}
         />
-        <UsersTable data={this.state} search={this.handleFormSubmit} />
+        <UsersTable 
+          data={this.state} 
+          search={this.handleFormSubmit} 
+          // sort={this.onSortChange}
+        />
       </div>
     );
   };
