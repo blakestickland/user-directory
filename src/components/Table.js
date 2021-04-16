@@ -96,11 +96,12 @@ import TableRow from "./TableRow";
 //   export default Table;
 
 function Table(props) {
-    const { result, sortType } = props;
-    let sorted = result.sort((a, b) => {
-        const isReversed = (sortType === 'asc') ? 1 : -1;
-        return isReversed * a.name.localeCompare(b.name)
-    }); 
+  console.log(props);
+    // const { result, sortType } = props;
+    // let sorted = result.sort((a, b) => {
+    //     const isReversed = (sortType === 'asc') ? 1 : -1;
+    //     return isReversed * a.name.localeCompare(b.name)
+    // }); 
     // sorted.sort((a, b) => {
     //     if (a.name < b.name) {
     //         return -1;
@@ -116,14 +117,16 @@ function Table(props) {
           <thead>
             <caption>User Directory</caption>
               <tr>
+                  <th scope="col">Image</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Picture</th>
+                  <th scope="col">Phone</th>
                   <th scope="col">Email</th>
                   <th scope="col">Location</th>
+                  <th scope="col">DOB</th>
               </tr>
           </thead>
           <tbody>
-              {sorted.length > 0 && sorted.map(user => {
+              {props.data.result.length > 0 && props.data.result.map (user => {
                   return <TableRow user={user}/>;
               })}
           </tbody>

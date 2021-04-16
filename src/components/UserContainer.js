@@ -1,45 +1,83 @@
 import React, { Component } from "react";
-import Container from "./Container";
-import Row from "./Row";
-import Col from "./Col";
-import Card from "./Card";
+// import Container from "./Container";
+// import Row from "./Row";
+// import Col from "./Col";
+// import Card from "./Card";
 import SearchForm from "./SearchForm";
-import MovieDetail from "./MovieDetail";
+// import MovieDetail from "./MovieDetail";
 import UsersTable from "./Table";
 import API from "../utils/API";
+import FilterForm from "./FilterForm";
 
 class UserContainer extends Component {
-  state = {
-    result: {},
-    search: "",
-    sortType: 'asc'
-  };
+    state = {
+      result: [],
+      result2: [],
+      // result: {},
+      search: "",
+      sortType: 'asc'
+    };
 
-  // When this component mounts, search for "5" of the randomly generated employees
+  // When this component mounts, search for "20" of the randomly generated employees
   componentDidMount() {
-    this.searchUsers("20");
+    this.getUsers();
   }
 
-  searchUsers = query => {
-    API.search(query)
+  // // New code in next para for filtering
+  // componentWillMount() {
+  //   this.setState({
+  //     result,
+  //     filteredResult: result
+  //   })
+  // }
+
+  getUsers = query => {
+    API.getUsers(query)
       .then(res => 
-        // console.log(res.data.results))
-        this.setState({ result: res.data.results }))
-      .catch(err => console.log(err));
+        this.setState({ result: res.data.results, result2: res.data.results }))
+        .catch(err => console.log(err));
   };
 
-  handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      [name]: value
-    });
-  };
+  // Filter
+  // filterUsers = () => {
+  //   users.filter(user => {
+  //   return  user.toLowercase().indexOf(this.state.getUsers.toLowercase()) !== -1
+  // })};
+  // filterUsers = () => {
+  //   users.filter(user => {
+  //   return  user.toLowercase().indexOf(this.state.getUsers.toLowercase()) !== -1
+  // })};
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
-  handleFormSubmit = event => {
+  
+  // Sort
+  //   users.sort(compareFunction)
+  //  compareFunction = (a,b) => {
+    //   //  apply logic here
+    //   return a.name - b.name // (asc)
+    //          b.name - a.name // (desc)
+    //  }
+    
+    handleInputChange = event => {
+      // const name = event.target.name;
+      const value = event.target.value;
+      this.setState({
+        search: value
+      });
+      const filteredResults = this.state.result2.filter((user) => {
+          return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
+            user.name.last.toLowerCase().includes(value.toLowerCase())
+          // return user.name.first.toLowerCase().indexOf(this.state.getUsers.toLowerCase()) !== -1
+        })
+        this.setState({result: filteredResults})
+      };
+    
+    // When the form is submitted, search the Random Users API for the value of `this.state.search`
+    handleFormSubmit = event => {
     event.preventDefault();
-    this.searchUsers(this.state.search);
+    const searchUsers = event.target.value;
+    this.setState({
+      search: searchUsers
+    });
   };
 
   // SORTING
@@ -76,8 +114,19 @@ class UserContainer extends Component {
 
   render() {
     return (
+      
       <div>
-        <UsersTable data={this.state}/>
+        <SearchForm
+          value={this.state.search}
+          search={this.state.search}
+          handleInputChange={this.handleInputChange}
+        />
+        <FilterForm
+         value={this.state.search}
+         search={this.state.search}
+         handleInputChange={this.handleInputChange}
+        />
+        <UsersTable data={this.state} search={this.handleFormSubmit} />
       </div>
     );
   };
