@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-// import Container from "./Container";
-// import Row from "./Row";
-// import Col from "./Col";
-// import Card from "./Card";
 import SearchForm from "./SearchForm";
-// import MovieDetail from "./MovieDetail";
 import UsersTable from "./Table";
 import API from "../utils/API";
 import FilterForm from "./FilterForm";
@@ -30,7 +25,7 @@ class UserContainer extends Component {
     console.log("getting users from API");
     API.getUsers(query)
       .then(res => 
-        this.setState({initialResult: res.data.results, resultView: res.data.results }))
+        this.setState({initialResult: [...res.data.results], resultView: res.data.results }))
       .catch(err => console.log(err));
   };
 
@@ -50,38 +45,37 @@ class UserContainer extends Component {
       [name]: value
     });
     const filteredResults = this.state.resultView.filter(user => {
-        return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
-          user.name.last.toLowerCase().includes(value.toLowerCase())
+      return user.location.city.toLowerCase().includes(value.toLowerCase()) ||
+        user.location.country.toLowerCase().includes(value.toLowerCase()) || 
+        user.location.state.toLowerCase().includes(value.toLowerCase())
       });
       this.setState({resultView: filteredResults});
-      console.log(value)
   };
 
   handleInputChangeFilter = event => {
     const value = event.target.value;
 
     const filteredResults = this.state.resultView.filter((user) => {
-        return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
-          user.name.last.toLowerCase().includes(value.toLowerCase())
-      });
-
+      return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
+      user.name.last.toLowerCase().includes(value.toLowerCase())
+    });
     this.setState({filter: value, resultView: filteredResults})
   };
 
-  handleFilterReset = () => {
+  handleFilterReset = event => {
+    event.preventDefault();
     this.setState({
       filter: "",
-      resultView: this.state.initialResult
+      resultView: [...this.state.initialResult]
     })
   }
     
   // When the form is submitted, search the Random Users API for the value of `this.state.search`
-  handleFormSubmit = event => {
-    event.preventDefault();
-    const searchUsers = event.target.value;
+  handleLocationReset = () => {
     this.setState({
-      search: searchUsers
-    });
+      search: "",
+      resultView: [...this.state.initialResult]
+    })
   };
 
   // SORTING
@@ -127,9 +121,7 @@ class UserContainer extends Component {
 
 
   render() {
-    console.log("this.state equals: ", this.state);
     return (
-      
       <div className="container">
         <h1 className="text-center">User Directory</h1>
         <hr></hr>
@@ -137,17 +129,16 @@ class UserContainer extends Component {
           value={this.state.search}
           search={this.state.search}
           handleInputChange={this.handleInputChange}
-          handleFormSubmit={this.handleFormSubmit}
+          handleLocationReset={this.handleLocationReset}
         />
         <FilterForm
-         value={this.state.filter}
-         filter={this.state.filter}
-         handleInputChangeFilter={this.handleInputChangeFilter}
-         handleFilterReset={this.handleFilterReset}
+          value={this.state.filter}
+          filter={this.state.filter}
+          handleInputChangeFilter={this.handleInputChangeFilter}
+          handleFilterReset={this.handleFilterReset}
         />
         <UsersTable 
           data={this.state} 
-          search={this.handleFormSubmit} 
           sort={this.onSortChange}
         />
       </div>

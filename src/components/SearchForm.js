@@ -3,20 +3,20 @@ import React from "react";
 function SearchForm(props) {
   return (
     <form>
-      <div className="form-group">
+      <div className="form-group text-center">
         <label htmlFor="search">Search:</label>
         <input
           id="search"
           name="search"
           type="text"
           value={props.value}
-          className="form-control"
+          className="mx-2"
           onChange={props.handleInputChange}
-          placeholder="Search For User by Name"
+          placeholder="Search by location"
         />
-        <br />
-        <button onClick={props.handleFormSubmit} className="btn btn-primary">
-          Search
+        {/* <br /> */}
+        <button onClick={props.handleLocationReset} className="btn btn-primary mx-2 p-1">
+          Reset
         </button>
       </div>
     </form>
