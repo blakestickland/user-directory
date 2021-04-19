@@ -7,7 +7,7 @@
   Easily view your User directory. See the profile picture, name, phone number, email, location, and date of birth for each user in a clearly presented table. Search through the list of users based on location. Filter the users by name. Also sort by last name alphabetically, from a-z or from z-a. Reset both the location search and the filtering of users independently. 
 
 
-  ## Link to the App on Githib pages
+  ## Link to the App on Github pages
   [Link to the deployed the User Directory app](https://floating-anchorage-84927.herokuapp.com/)
 
   ## Link to Github repo
