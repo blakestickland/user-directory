@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+<!-- Title of the project -->
+  # User Directory
+  
+  [![MIT License](https://img.shields.io/badge/MIT-License-brightgreen)](https://choosealicense.com/licenses/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  ## Description 
+  Easily view your User directory. See the profile picture, name, phone number, email, location, and date of birth for each user in a clearly presented table. Search through the list of users based on location. Filter the users by name. Also sort by last name alphabetically, from a-z or from z-a. Reset both the location search and the filtering of users independently. 
 
-## Available Scripts
 
-In the project directory, you can run:
+  ## Link to the Deployed App
+  [Link to the deployed the User Directory app](https://floating-anchorage-84927.herokuapp.com/)
 
-### `npm start`
+  ## Link to Github repo
+  [Link to Github repo for the User Directory app](https://github.com/blakestickland/budget-tracker)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  
+  ## Table of Contents
+  * [Usage](#usage)
+  * [Technology used](#technology)
+  * [My role](#role)
+  * [License](#license)
+  * [Questions](#questions)
+  * [Screenshots](#screenshots)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  
+  ## Usage
+  1. You are presented with a User Directory. 
+  2. Search by typing in the location in the input box. Or filter the users by name. Both fields can by reset back to default values by clicking on the labelled button.
+  3. Click on the up/down/up-down arrow(s) to the right of Name table column heading to sort the users alphabetically by last name. 
+    
+  ## Technology
+  * React.js
+  * JavaScript
+  * Node.js
+  * Github
+  
+  ## Role
+  * Created the app using an "npx create-react-app" command. 
+  * Added the components.
+  * Coded the React app.
+  * Deployed the app to Github Pages. 
 
-### `npm test`
+  ## License
+  [MIT License](https://choosealicense.com/licenses/)
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  ## Questions
+  Please refer any questions via Github or my email address.
+  Github username: [blakestickland](https://github.com/blakestickland)
 
-### `npm run build`
+  Email: blakestickland@gmail.com
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  ## Screenshots
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ![Home page displaying the User Directory](https://user-images.githubusercontent.com/73763708/115243226-0ce4f600-a166-11eb-8165-41da00b2ddcc.png)
