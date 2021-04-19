@@ -2,7 +2,7 @@ import React from "react";
 import moment from 'moment';
 
 function TableRow(props) {
-  return  <tr data-key={props.user.login.uuid}>
+  return  <tr>
               <td><img src={props.user.picture.thumbnail} alt="user mugshot" /></td>
               <td>{props.user.name.first} {props.user.name.last}</td>
               <td>{props.user.phone}</td>
@@ -13,7 +13,7 @@ function TableRow(props) {
                 {props.user.location.country}
               </td>
               <td>{moment(props.user.dob.date).calendar()}</td>
-          </tr>;
+          </tr>
 }
 
 export default TableRow;

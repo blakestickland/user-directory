@@ -1,7 +1,7 @@
 import React from 'react'
 
 function FilterForm (props) {
-  
+  console.log(props);
     return (
       <div>
         <label htmlFor="filter">Type to filter Users: </label>

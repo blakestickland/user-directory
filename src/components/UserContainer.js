@@ -10,13 +10,16 @@ import API from "../utils/API";
 import FilterForm from "./FilterForm";
 
 class UserContainer extends Component {
-    state = {
-      initialResult: [],
-      resultView: [],
-      search: "",
-      filter: "",
-      sortTypes: "up"
-    };
+  constructor (){
+    super();
+    this.state = {
+        initialResult: [],
+        resultView: [],
+        search: "",
+        filter: "",
+        sortTypes: "default"
+      };
+  }  
 
   // When this component mounts, search for "20" of the randomly generated employees
   componentDidMount() {
@@ -24,9 +27,10 @@ class UserContainer extends Component {
   };
 
   getUsers = query => {
+    console.log("getting users from API");
     API.getUsers(query)
       .then(res => 
-        this.setState({ ...this.state, initialResult: res.data.results, resultView: res.data.results }))
+        this.setState({initialResult: res.data.results, resultView: res.data.results }))
       .catch(err => console.log(err));
   };
 
@@ -34,7 +38,6 @@ class UserContainer extends Component {
     event.preventDefault();
     const currentSearch = event.target.value;
     this.setState({
-      ...this.state,
       search: currentSearch
     });
   };
@@ -44,33 +47,29 @@ class UserContainer extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      ...this.state,
       [name]: value
     });
     const filteredResults = this.state.resultView.filter(user => {
         return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
           user.name.last.toLowerCase().includes(value.toLowerCase())
       });
-      this.setState({...this.stadte, resultView: filteredResults});
+      this.setState({resultView: filteredResults});
       console.log(value)
   };
 
   handleInputChangeFilter = event => {
     const value = event.target.value;
-    this.setState({
-      ...this.state,
-      filter: value
-    });
+
     const filteredResults = this.state.resultView.filter((user) => {
         return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
           user.name.last.toLowerCase().includes(value.toLowerCase())
       });
-      this.setState({...this.state, resultView: filteredResults})
+
+    this.setState({filter: value, resultView: filteredResults})
   };
 
   handleFilterReset = () => {
     this.setState({
-      ...this.state,
       filter: "",
       resultView: this.state.initialResult
     })
@@ -81,7 +80,6 @@ class UserContainer extends Component {
     event.preventDefault();
     const searchUsers = event.target.value;
     this.setState({
-      ...this.state,
       search: searchUsers
     });
   };
@@ -99,30 +97,27 @@ class UserContainer extends Component {
     // put sortTypes here as a switch statement
     switch (sortTypes) {
       case "down": 
-        sortedResult = resultView.sort((a, b) => b.name.last.localeCompare(a.name.last));
+        sortedResult = resultView.sort((a, b) => a.name.last.localeCompare(b.name.last));
         nextSort = 'up';    
         this.setState({
-          ...this.state,
           sortTypes: nextSort,
           resultView: sortedResult
         });
       break;
 
       case "up": 
-        sortedResult = resultView.sort((a, b) => a.name.last.localeCompare(b.name.last));
+        sortedResult = initialResult;
         nextSort = 'default';
         this.setState({
-          ...this.state,
           sortTypes: nextSort,
           resultView: sortedResult
         });
       break;
 
       default: 
-        sortedResult = initialResult;
+        sortedResult = resultView.sort((a, b) => b.name.last.localeCompare(a.name.last));
         nextSort = 'down';
         this.setState({
-          ...this.state,
           sortTypes: nextSort,
           resultView: sortedResult
         });
@@ -132,6 +127,7 @@ class UserContainer extends Component {
 
 
   render() {
+    console.log("this.state equals: ", this.state);
     return (
       
       <div className="container">
