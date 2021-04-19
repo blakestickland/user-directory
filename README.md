@@ -52,4 +52,4 @@
 
   ## Screenshots
 
-  ![Home page displaying the User Directory](https://user-images.githubusercontent.com/73763708/115243226-0ce4f600-a166-11eb-8165-41da00b2ddcc.png)
+  ![Home page displaying the User Directory](https://user-images.githubusercontent.com/73763708/115243650-7ebd3f80-a166-11eb-8167-9738eb39cf8d.png)
