@@ -8,7 +8,7 @@
 
 
   ## Link to the App on Github pages
-  [Link to the deployed the User Directory app](https://floating-anchorage-84927.herokuapp.com/)
+  [Link to the deployed the User Directory app](https://blakestickland.github.io/user-directory/)
 
   ## Link to Github repo
   [Link to Github repo for the User Directory app](https://github.com/blakestickland/user-directory)
