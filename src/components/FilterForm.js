@@ -4,14 +4,20 @@ function FilterForm (props) {
   
     return (
       <div>
-        <label htmlFor="filter">Filter by Name: </label>
+        <label htmlFor="filter">Type to filter Users: </label>
         <input 
-            type="text" 
             id="filter" 
+            name="filter"
+            type="text" 
             // value={this.state.userFilter} 
-            value={props.search}
+            value={props.value}
             placeholder="Filter by Name"
-            onChange={props.handleInputChange}/>
+            onChange={props.handleInputChangeFilter}
+            className="mx-2" />
+          <button onClick={props.handleFilterReset} className="btn btn-danger mx-2 p-1">
+            Reset
+          </button>
+
       </div>
       )
   }

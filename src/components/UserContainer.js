@@ -11,9 +11,10 @@ import FilterForm from "./FilterForm";
 
 class UserContainer extends Component {
     state = {
-      result: [],
-      currentResult: [],
+      initialResult: [],
+      resultView: [],
       search: "",
+      filter: "",
       sortTypes: "up"
     };
 
@@ -25,27 +26,62 @@ class UserContainer extends Component {
   getUsers = query => {
     API.getUsers(query)
       .then(res => 
-        this.setState({ result: res.data.results, currentResult: res.data.results }))
+        this.setState({ ...this.state, initialResult: res.data.results, resultView: res.data.results }))
       .catch(err => console.log(err));
+  };
+
+  handleSearch = (event) => {
+    event.preventDefault();
+    const currentSearch = event.target.value;
+    this.setState({
+      ...this.state,
+      search: currentSearch
+    });
   };
     
   handleInputChange = event => {
+    event.persist();
+    const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      search: value
+      ...this.state,
+      [name]: value
     });
-    const filteredResults = this.state.currentResult.filter((user) => {
+    const filteredResults = this.state.resultView.filter(user => {
         return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
           user.name.last.toLowerCase().includes(value.toLowerCase())
       });
-      this.setState({result: filteredResults})
+      this.setState({...this.stadte, resultView: filteredResults});
+      console.log(value)
   };
+
+  handleInputChangeFilter = event => {
+    const value = event.target.value;
+    this.setState({
+      ...this.state,
+      filter: value
+    });
+    const filteredResults = this.state.resultView.filter((user) => {
+        return user.name.first.toLowerCase().includes(value.toLowerCase()) ||
+          user.name.last.toLowerCase().includes(value.toLowerCase())
+      });
+      this.setState({...this.state, resultView: filteredResults})
+  };
+
+  handleFilterReset = () => {
+    this.setState({
+      ...this.state,
+      filter: "",
+      resultView: this.state.initialResult
+    })
+  }
     
   // When the form is submitted, search the Random Users API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
     const searchUsers = event.target.value;
     this.setState({
+      ...this.state,
       search: searchUsers
     });
   };
@@ -55,68 +91,44 @@ class UserContainer extends Component {
 	// method called every time the sort button is clicked
 	// it will change the currentSort value to the next one
 	onSortChange = () => {
-    const { sortTypes, currentResult } = this.state;
-    console.log({sortTypes});
+    const { sortTypes, resultView, initialResult } = this.state;
+    // console.log({sortTypes});
 		let nextSort;
     let sortedResult;
+    
+    // put sortTypes here as a switch statement
+    switch (sortTypes) {
+      case "down": 
+        sortedResult = resultView.sort((a, b) => b.name.last.localeCompare(a.name.last));
+        nextSort = 'up';    
+        this.setState({
+          ...this.state,
+          sortTypes: nextSort,
+          resultView: sortedResult
+        });
+      break;
 
-		if (sortTypes === 'down') {
-      sortedResult = currentResult.sort((a, b) => b.name.last.localeCompare(a.name.last));
-      console.log(sortedResult);
-      nextSort = 'up';
-      this.setState({
-        ...this.state,
-        sortTypes: nextSort,
-        currentResult: sortedResult
-      });
-    }
-		else if (sortTypes === 'up') {
-      sortedResult = currentResult.sort((a, b) => a.name.last.localeCompare(b.name.last));
-      console.log(sortedResult);
-      nextSort = 'default';
-      this.setState({
-        ...this.state,
-        sortTypes: nextSort,
-        currentResult: sortedResult
-      });
+      case "up": 
+        sortedResult = resultView.sort((a, b) => a.name.last.localeCompare(b.name.last));
+        nextSort = 'default';
+        this.setState({
+          ...this.state,
+          sortTypes: nextSort,
+          resultView: sortedResult
+        });
+      break;
 
-    } 
-		else if (sortTypes === 'default') {
-      // sortedResult = currentResult.sort((a, b) => a);
-      nextSort = 'down';
-      this.setState({
-        ...this.state,
-        sortTypes: nextSort,
-        currentResult: this.state.result
-      });
-
-    } 
-
-// put sortType here as a switch statement
-// switch (sortTypes) {
-//   case "up": {}currentResult.sort((a, b) => a.name.last - b.name.last);
-//     nextSort = 'default';
-//     break;
-
-//   case "down": currentResult.sort((a, b) => b.name.last - a.name.last);
-//     nextSort = 'up';
-//     break;
-
-//   default: currentResult.sort((a, b) => a);
-//   nextSort = 'down'; 
-//   break;
-// }
-
-// pass in nextSort (defined above)
-// within each switch case, grab current result state, do .sort, put sort logic and set currentState equal to it. 
-// put currentState into a temp variable.
-// have a method of changing the button to activate the next state. 
-		// this.setState({
-		// 	...this.state,
-    //   sortTypes: nextSort,
-    //   currentResult: sortedResult
-		// });
-	};
+      default: 
+        sortedResult = initialResult;
+        nextSort = 'down';
+        this.setState({
+          ...this.state,
+          sortTypes: nextSort,
+          resultView: sortedResult
+        });
+      break;
+    };
+  };
 
 
   render() {
@@ -129,11 +141,13 @@ class UserContainer extends Component {
           value={this.state.search}
           search={this.state.search}
           handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
         />
         <FilterForm
-         value={this.state.search}
-         search={this.state.search}
-         handleInputChange={this.handleInputChange}
+         value={this.state.filter}
+         filter={this.state.filter}
+         handleInputChangeFilter={this.handleInputChangeFilter}
+         handleFilterReset={this.handleFilterReset}
         />
         <UsersTable 
           data={this.state} 

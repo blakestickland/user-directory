@@ -26,9 +26,9 @@ function Table(props) {
               <tr>
                   <th scope="col">Image</th>
                   <th scope="col">Name
-                    <button onClick={props.sort}>
-                         <i className={`fas fa-${sortType[props.data.sortTypes].class}`} />
-                     </button>
+                    <button onClick={props.sort} className="border-0 mx-2">
+                      <i className={`fa fa-${sortType[props.data.sortTypes].class}`} />
+                    </button>
                   </th>
                   
                   <th scope="col">Phone</th>
@@ -38,8 +38,8 @@ function Table(props) {
               </tr>
           </thead>
           <tbody>
-              {props.data.currentResult.length > 0 &&
-               [...props.data.currentResult]
+              {props.data.resultView.length > 0 &&
+               [...props.data.resultView]
                .sort(sortType[props.data.sortTypes].fn)
                .map (user => {
                   return <TableRow user={user}/>;
