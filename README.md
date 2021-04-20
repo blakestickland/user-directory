@@ -7,11 +7,11 @@
   Easily view your User directory. See the profile picture, name, phone number, email, location, and date of birth for each user in a clearly presented table. Search through the list of users based on location. Filter the users by name. Also sort by last name alphabetically, from a-z or from z-a. Reset both the location search and the filtering of users independently. 
 
 
-  ## Link to the App on Github pages
-  [Link to the deployed the User Directory app](https://blakestickland.github.io/user-directory/)
+  ## Link to the Deployed App
+  [Link to the deployed the User Directory app](https://floating-anchorage-84927.herokuapp.com/)
 
   ## Link to Github repo
-  [Link to Github repo for the User Directory app](https://github.com/blakestickland/user-directory)
+  [Link to Github repo for the User Directory app](https://github.com/blakestickland/budget-tracker)
 
   
   ## Table of Contents
@@ -53,4 +53,3 @@
   ## Screenshots
 
   ![Home page displaying the User Directory](https://user-images.githubusercontent.com/73763708/115243650-7ebd3f80-a166-11eb-8167-9738eb39cf8d.png)
-
