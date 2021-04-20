@@ -8,7 +8,7 @@
 
 
   ## Link to the Deployed App
-  [Link to the deployed the User Directory app](https://blakestickland.github.io/user-directory/)
+  [Link to the deployed the User Directory app](https://blakestickland.github.io/user-directory/git push )
 
   ## Link to Github repo
   [Link to Github repo for the User Directory app](https://github.com/blakestickland/budget-tracker)
