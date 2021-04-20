@@ -91,7 +91,8 @@ class UserContainer extends Component {
     // put sortTypes here as a switch statement
     switch (sortTypes) {
       case "down": 
-        sortedResult = resultView.sort((a, b) => a.name.last.localeCompare(b.name.last));
+      sortedResult = resultView.sort((a, b) => b.name.last.localeCompare(a.name.last));
+
         nextSort = 'up';    
         this.setState({
           sortTypes: nextSort,
@@ -109,7 +110,8 @@ class UserContainer extends Component {
       break;
 
       default: 
-        sortedResult = resultView.sort((a, b) => b.name.last.localeCompare(a.name.last));
+      sortedResult = resultView.sort((a, b) => a.name.last.localeCompare(b.name.last));
+
         nextSort = 'down';
         this.setState({
           sortTypes: nextSort,

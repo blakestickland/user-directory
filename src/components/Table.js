@@ -7,15 +7,15 @@ function Table(props) {
   const sortType = {
     up: {
       class: 'sort-up',
-      fn: (a, b) => a.name.last - b.name.last
+      // fn: (a, b) => a.name.last - b.name.last
     },
     down: {
       class: 'sort-down',
-      fn: (a, b) => b.name.last - a.name.last
+      // fn: (a, b) => b.name.last - a.name.last
     },
     default: {
       class: 'sort',
-      fn: (a, b) => a
+      // fn: (a, b) => a
     }
   };
 

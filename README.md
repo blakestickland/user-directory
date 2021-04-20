@@ -7,19 +7,11 @@
   Easily view your User directory. See the profile picture, name, phone number, email, location, and date of birth for each user in a clearly presented table. Search through the list of users based on location. Filter the users by name. Also sort by last name alphabetically, from a-z or from z-a. Reset both the location search and the filtering of users independently. 
 
 
-<<<<<<< HEAD
-  ## Link to the App on Github pages
-  [Link to the deployed the User Directory app](https://floating-anchorage-84927.herokuapp.com/)
-
-  ## Link to Github repo
-  [Link to Github repo for the User Directory app](https://github.com/blakestickland/user-directory)
-=======
   ## Link to the Deployed App
-  [Link to the deployed the User Directory app](https://floating-anchorage-84927.herokuapp.com/)
+  [Link to the deployed the User Directory app](https://blakestickland.github.io/user-directory/)
 
   ## Link to Github repo
   [Link to Github repo for the User Directory app](https://github.com/blakestickland/budget-tracker)
->>>>>>> e33a29dddd9b278dfd9bd391d904668c54df55e2
 
   
   ## Table of Contents
@@ -34,7 +26,7 @@
   ## Usage
   1. You are presented with a User Directory. 
   2. Search by typing in the location in the input box. Or filter the users by name. Both fields can by reset back to default values by clicking on the labelled button.
-  3. Click on the up/down/up-down arrow(s) to the right of Name table column heading to sort the users alphabetically by last name. 
+  3. Click on the sort arrows to the right of "Name" table column heading to sort the users alphabetically by last name. 
     
   ## Technology
   * React.js
