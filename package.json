@@ -1,8 +1,14 @@
 {
+<<<<<<< HEAD
   "name": "user-directory",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://blakestickland.github.io/user-directory",
+=======
+  "name": "employee-database",
+  "version": "0.1.0",
+  "private": true,
+>>>>>>> e33a29dddd9b278dfd9bd391d904668c54df55e2
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
@@ -17,8 +23,11 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
+<<<<<<< HEAD
     "predeploy": "npm run build",
     "deploy": "gh-pages -b main -d build",
+=======
+>>>>>>> e33a29dddd9b278dfd9bd391d904668c54df55e2
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
